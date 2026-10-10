@@ -259,7 +259,7 @@ select:focus {
   font-size: 12px;
   font-weight: 600;
 }
-/* صفحة الدخول: نفس عائلة ألوان المرجع، بتكوين خاص للتطبيق. */
+
 .auth-page {
   min-height: 100vh;
   background:
@@ -470,7 +470,7 @@ select:focus {
   color: #8191a9;
   font-size: 11px;
 }
-/* الـ Layout ثابت، والـ Outlet بيغيّر محتوى العمود الأوسط. */
+
 .topbar {
   height: 76px;
   background: #fff;

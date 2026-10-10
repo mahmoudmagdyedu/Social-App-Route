@@ -1,12 +1,12 @@
+import { getPostLikes } from "../API/API";
 import { useCallback } from "react";
-import { postService } from "../services/social";
 import useCollection from "../hooks/useCollection";
 import UserCard from "./UserCard";
 import { EmptyState, ErrorState, PaginationControls } from "./Status";
-const LikesList = ({ postId }: { postId: string }) => {
+function LikesList({ postId }: { postId: string }) {
   const loader = useCallback(
     (page: number, signal: AbortSignal) =>
-      postService.likes(postId, page, signal),
+      getPostLikes(postId, page, signal),
     [postId]
   );
   const list = useCollection(loader);
@@ -29,5 +29,5 @@ const LikesList = ({ postId }: { postId: string }) => {
       />
     </>
   );
-};
+}
 export default LikesList;

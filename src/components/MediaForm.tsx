@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import toast from "react-hot-toast";
 import Icon from "./Icon";
-import { errorMessage, validateImage } from "../services/api";
-const MediaForm = ({
+import { errorMessage, validateImage } from "../API/API";
+function MediaForm({
   initialText = "",
   existingImage,
   placeholder = "إيه الحكاية النهارده؟",
@@ -17,7 +17,7 @@ const MediaForm = ({
   label?: string;
   compact?: boolean;
   onSubmit: (text: string, image?: File) => Promise<void>;
-}) => {
+}) {
   const [text, setText] = useState(initialText);
   const [image, setImage] = useState<File>();
   const [preview, setPreview] = useState("");
@@ -132,5 +132,5 @@ const MediaForm = ({
       </div>
     </form>
   );
-};
+}
 export default MediaForm;

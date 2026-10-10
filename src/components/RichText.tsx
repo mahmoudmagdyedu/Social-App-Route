@@ -1,5 +1,5 @@
-// React بتعمل escape للنص؛ بنلوّن الـ mentions من غير dangerouslySetInnerHTML.
-const RichText = ({ text }: { text: string }) => (
+function RichText({ text }: { text: string }) {
+  return (
   <p className="post-text" dir="auto">
     {text.split(/(@[a-zA-Z0-9_]+)/g).map((part, i) =>
       part.startsWith("@") ? (
@@ -12,4 +12,5 @@ const RichText = ({ text }: { text: string }) => (
     )}
   </p>
 );
+}
 export default RichText;

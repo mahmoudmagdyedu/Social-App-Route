@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Brand from "../components/Brand";
 import Avatar from "../components/Avatar";
 import Icon from "../components/Icon";
-const Nav = ({ unread }: { unread: number }) => {
+function Nav({ unread }: { unread: number }) {
   const { user } = useAuth();
   return (
     <header className="topbar">
@@ -38,5 +38,5 @@ const Nav = ({ unread }: { unread: number }) => {
       </div>
     </header>
   );
-};
+}
 export default Nav;

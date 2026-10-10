@@ -12,13 +12,13 @@
 | 4   | Change Password        | PATCH  | `/users/change-password`                     | Settings                  |
 | 5   | Upload Profile Photo   | PUT    | `/users/upload-photo`                        | Settings                  |
 | 6   | Get My Profile         | GET    | `/users/profile-data`                        | AuthProvider              |
-| 7   | Get Bookmarks          | GET    | `/users/bookmarks`                           | Feed /bookmarks           |
+| 7   | Get Bookmarks          | GET    | `/users/bookmarks`                           | Home /bookmarks           |
 | 8   | Get Follow Suggestions | GET    | `/users/suggestions`                         | Discover / Layout         |
 | 9   | Get User Profile       | GET    | `/users/:userId/profile`                     | Profile                   |
 | 10  | Follow/Unfollow        | PUT    | `/users/:userId/follow`                      | Profile / UserCard        |
 | 11  | Get User Posts         | GET    | `/users/:userId/posts`                       | Profile                   |
-| 12  | Get All Posts          | GET    | `/posts`                                     | Feed                      |
-| 13  | Get Home Feed          | GET    | `/posts/feed`                                | Feed / المتابَعين / الصور |
+| 12  | Get All Posts          | GET    | `/posts`                                     | Home                      |
+| 13  | Get Home Home          | GET    | `/posts/feed`                                | Home / المتابَعين / الصور |
 | 14  | Create Post            | POST   | `/posts`                                     | Composer                  |
 | 15  | Get Single Post        | GET    | `/posts/:postId`                             | PostDetails               |
 | 16  | Get Post Likes         | GET    | `/posts/:postId/likes`                       | LikesList                 |
@@ -46,10 +46,10 @@
 - Change password: `password`, `newPassword`، والـResponse يرجع JWT جديد.
 - Post multipart: `body` و`image` اختياري. Comment/reply multipart: `content` و`image` اختياري. Profile multipart: `photo`.
 - Share JSON: `body`. الخادم يمنع empty string ويمنع مشاركة نفس المنشور مرتين (409). التطبيق يدعم مشاركة بدون تعليق بإرسال مسافة، وتم اختبارها فعلياً.
-- Feed: `only=following`, `hasImage=true`, `page`, `limit`. التطبيق يستخدم page-based pagination؛ الخادم يدعم cursor أيضاً بحسب التوثيق.
+- Home: `only=following`, `hasImage=true`, `page`, `limit`. التطبيق يستخدم page-based pagination؛ الخادم يدعم cursor أيضاً بحسب التوثيق.
 - Lists: `data.posts`, `data.bookmarks`, `data.suggestions`, `data.comments`, `data.replies`, `data.likes`, `data.notifications`، والصفحات داخل `meta.pagination`.
 - تغيير الصورة الشخصية ينشئ منشوراً تلقائياً عند الخادم. برنامج الاختبار ينظف المنشور الإضافي أيضاً.
 - **سلوك اتثبت بالاختبار في 5 أكتوبر 2026:** `/notifications` بدون `unread` بيرجع الكل. `unread=false` بيرجع عناصر `isRead=false`، و`unread=true` بيرجع المقروءة. عشان كده تبويب «غير مقروءة» يستخدم `unread=false`، وتبويب «الكل» بيحذف الفلتر. الاسم في التوثيق لا يطابق تفسير الخادم الحالي.
-- فلتر الصور لكل الناس يستخدم `/posts/feed?only=all&hasImage=true`؛ ترك `only` بيرجع Feed للمتابَعين افتراضياً. تم التحقق من وجود صور في كل عناصر نتيجة `only=all`.
+- فلتر الصور لكل الناس يستخدم `/posts/feed?only=all&hasImage=true`؛ ترك `only` بيرجع Home للمتابَعين افتراضياً. تم التحقق من وجود صور في كل عناصر نتيجة `only=all`.
 
 اختيارات الأمان وإظهار الملكية في الواجهة لا تستبدل تحقق الخادم. مفيش calls لحذف حساب، تعديل بيانات شخصية، نسيان كلمة سر، رفع غلاف أوsearch عام لأن العمليات دي مش ضمن الـ32 endpoint المرفقة.

@@ -1,9 +1,9 @@
+import { updatePost, deletePost, likePost, bookmarkPost, sharePost } from "../API/API";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { postService } from "../services/social";
-import { ApiError, errorMessage } from "../services/api";
+import { ApiError, errorMessage } from "../API/API";
 import { formatTime, hasLiked } from "../services/format";
 import type { Post } from "../types";
 import Avatar from "./Avatar";
@@ -14,7 +14,8 @@ import RichText from "./RichText";
 import Comments from "./Comments";
 import LikesList from "./LikesList";
 
-const PostBody = ({ post }: { post: Post }) => (
+function PostBody({ post }: { post: Post }) {
+  return (
   <>
     <RichText text={post.body || ""} />
     {post.image && (
@@ -34,7 +35,8 @@ const PostBody = ({ post }: { post: Post }) => (
     )}
   </>
 );
-const PostCard = ({
+}
+function PostCard({
   post: initial,
   expanded = false,
   onDeleted,
@@ -44,7 +46,7 @@ const PostCard = ({
   expanded?: boolean;
   onDeleted?: (id: string) => void;
   onShared?: () => void;
-}) => {
+}) {
   const { user } = useAuth();
   const [changes, setChanges] = useState<Partial<Post>>({});
   const post = { ...initial, ...changes };
@@ -73,7 +75,7 @@ const PostCard = ({
       likesCount: Math.max(0, count + (liked ? -1 : 1)),
     }));
     try {
-      const result = await postService.like(post._id);
+      const result = await likePost(post._id);
       setChanges((prev) => ({
         ...prev,
         likes: result.data.post.likes,
@@ -91,7 +93,7 @@ const PostCard = ({
     setBusy(true);
     setChanges((prev) => ({ ...prev, bookmarked: !previous }));
     try {
-      const result = await postService.bookmark(post._id);
+      const result = await bookmarkPost(post._id);
       setChanges((prev) => ({ ...prev, bookmarked: result.data.bookmarked }));
       toast.success(
         result.data.bookmarked ? "اتحفظ في مجموعتك" : "اتشال من المحفوظات"
@@ -104,7 +106,7 @@ const PostCard = ({
     }
   };
   const edit = async (text: string, image?: File) => {
-    const result = await postService.update(post._id, text, image);
+    const result = await updatePost(post._id, text, image);
     setChanges((prev) => ({ ...prev, ...result.data.post, user: post.user }));
     setModal(null);
     toast.success("المنشور اتعدل");
@@ -113,7 +115,7 @@ const PostCard = ({
     setDeleted(true);
     setModal(null);
     try {
-      await postService.remove(post._id);
+      await deletePost(post._id);
       onDeleted?.(post._id);
       toast.success("المنشور اتحذف");
     } catch (e) {
@@ -125,7 +127,7 @@ const PostCard = ({
     setBusy(true);
     setShareError("");
     try {
-      await postService.share(post._id, shareText.trim());
+      await sharePost(post._id, shareText.trim());
       setChanges((prev) => ({
         ...prev,
         sharesCount: (post.sharesCount || 0) + 1,
@@ -346,5 +348,5 @@ const PostCard = ({
       )}
     </article>
   );
-};
+}
 export default PostCard;

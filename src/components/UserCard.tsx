@@ -1,13 +1,13 @@
+import { followUser } from "../API/API";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Avatar from "./Avatar";
 import Icon from "./Icon";
 import { useAuth } from "../context/AuthContext";
-import { userService } from "../services/social";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import type { User } from "../types";
-const UserCard = ({
+function UserCard({
   user,
   compact = false,
   initiallyFollowing = false,
@@ -15,7 +15,7 @@ const UserCard = ({
   user: User;
   compact?: boolean;
   initiallyFollowing?: boolean;
-}) => {
+}) {
   const { user: me, refreshUser } = useAuth();
   const [optimistic, setOptimistic] = useState<boolean | null>(null);
   const following =
@@ -26,7 +26,7 @@ const UserCard = ({
     setOptimistic(!following);
     setBusy(true);
     try {
-      await userService.follow(user._id);
+      await followUser(user._id);
       await refreshUser();
     } catch (e) {
       toast.error(errorMessage(e));
@@ -67,5 +67,5 @@ const UserCard = ({
       )}
     </div>
   );
-};
+}
 export default UserCard;

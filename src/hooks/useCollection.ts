@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import type { Collection } from "../types";
-
-// الـ loader بيتبعت بـ useCallback؛ Cleanup يمنع رد طلب قديم من تغيير الصفحة الجديدة.
-const useCollection = <T>(
-  loader: (page: number, signal: AbortSignal) => Promise<Collection<T>>
-) => {
+function useCollection<T>(loader: (page: number, signal: AbortSignal) => Promise<Collection<T>>) {
   const [data, setData] = useState<Collection<T>>({ items: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -30,5 +26,5 @@ const useCollection = <T>(
   }, [loader, page, version]);
   const refresh = useCallback(() => setVersion((v) => v + 1), []);
   return { ...data, setData, loading, error, page, setPage, refresh };
-};
+}
 export default useCollection;

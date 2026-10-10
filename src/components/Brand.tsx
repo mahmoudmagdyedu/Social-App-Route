@@ -1,5 +1,6 @@
-import { Link } from "react-router";
-const Brand = () => (
+import { Link } from "react-router-dom";
+function Brand() {
+  return (
   <Link to="/" className="brand" aria-label="Social، الرئيسية">
     <span className="brand-mark">
       <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -21,4 +22,5 @@ const Brand = () => (
     </span>
   </Link>
 );
+}
 export default Brand;

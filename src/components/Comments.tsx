@@ -1,9 +1,9 @@
+import { getComments, createComment, updateComment, deleteComment, likeComment } from "../API/API";
 import { useCallback, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { commentService } from "../services/social";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import { formatTime, hasLiked } from "../services/format";
 import useCollection from "../hooks/useCollection";
 import type { Comment } from "../types";
@@ -13,7 +13,7 @@ import Modal from "./Modal";
 import RichText from "./RichText";
 import { EmptyState, ErrorState, PaginationControls } from "./Status";
 
-const CommentItem = ({
+function CommentItem({
   comment: initial,
   postId,
   postOwnerId,
@@ -25,7 +25,7 @@ const CommentItem = ({
   postOwnerId: string;
   allowReply: boolean;
   onDeleted: (id: string) => void;
-}) => {
+}) {
   const { user } = useAuth();
   const [changes, setChanges] = useState<Partial<Comment>>({});
   const comment = { ...initial, ...changes };
@@ -49,7 +49,7 @@ const CommentItem = ({
       likesCount: Math.max(0, count + (liked ? -1 : 1)),
     }));
     try {
-      const result = await commentService.like(postId, comment._id);
+      const result = await likeComment(postId, comment._id);
       setChanges((prev) => ({
         ...prev,
         likes: result.data.comment.likes,
@@ -63,7 +63,7 @@ const CommentItem = ({
     }
   };
   const edit = async (text: string, image?: File) => {
-    const result = await commentService.update(
+    const result = await updateComment(
       postId,
       comment._id,
       text,
@@ -82,7 +82,7 @@ const CommentItem = ({
     setBusy(true);
     setDeleteError("");
     try {
-      await commentService.remove(postId, comment._id);
+      await deleteComment(postId, comment._id);
       onDeleted(comment._id);
       toast.success("التعليق اتحذف");
     } catch (e) {
@@ -187,9 +187,9 @@ const CommentItem = ({
       )}
     </article>
   );
-};
+}
 
-const Comments = ({
+function Comments({
   postId,
   postOwnerId,
   parentId,
@@ -199,15 +199,15 @@ const Comments = ({
   postOwnerId: string;
   parentId?: string;
   onCountChange?: (delta: number) => void;
-}) => {
+}) {
   const loader = useCallback(
     (page: number, signal: AbortSignal) =>
-      commentService.list(postId, page, signal, parentId),
+      getComments(postId, page, signal, parentId),
     [postId, parentId]
   );
   const list = useCollection(loader);
   const create = async (text: string, image?: File) => {
-    const result = await commentService.create(postId, text, image, parentId);
+    const result = await createComment(postId, text, image, parentId);
     const item = result.data.comment || result.data.reply;
     if (item)
       list.setData((prev) => ({ ...prev, items: [...prev.items, item] }));
@@ -262,5 +262,5 @@ const Comments = ({
       />
     </section>
   );
-};
+}
 export default Comments;

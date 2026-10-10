@@ -10,8 +10,8 @@ export interface AuthState {
   refreshUser: () => Promise<void>;
 }
 export const AuthContext = createContext<AuthState | null>(null);
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) throw new Error("useAuth must be inside AuthProvider");
   return context;
-};
+}

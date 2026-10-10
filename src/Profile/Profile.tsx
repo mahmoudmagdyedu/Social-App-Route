@@ -1,9 +1,9 @@
+import { getUserProfile, followUser, getUserPosts } from "../API/API";
 import { useCallback, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { postService, userService } from "../services/social";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import useCollection from "../hooks/useCollection";
 import useResource from "../hooks/useResource";
 import Avatar from "../components/Avatar";
@@ -16,20 +16,20 @@ import {
   PaginationControls,
   Skeleton,
 } from "../components/Status";
-const Profile = () => {
+function Profile() {
   const { user: me, refreshUser } = useAuth();
   const { userId } = useParams();
   const target = userId || me!._id;
   const own = target === me?._id;
   const [busy, setBusy] = useState(false);
   const profileLoader = useCallback(
-    (signal: AbortSignal) => userService.profile(target, signal),
+    (signal: AbortSignal) => getUserProfile(target, signal),
     [target]
   );
   const profile = useResource(profileLoader);
   const postsLoader = useCallback(
     (page: number, signal: AbortSignal) =>
-      postService.userPosts(target, page, signal),
+      getUserPosts(target, page, signal),
     [target]
   );
   const posts = useCollection(postsLoader);
@@ -38,7 +38,7 @@ const Profile = () => {
   const follow = async () => {
     setBusy(true);
     try {
-      await userService.follow(target);
+      await followUser(target);
       profile.refresh();
       await refreshUser();
       toast.success(following ? "تم إلغاء المتابعة" : "دايرتك كبرت بحد جديد");
@@ -171,5 +171,5 @@ const Profile = () => {
       )}
     </>
   );
-};
+}
 export default Profile;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 
-const useResource = <T>(loader: (signal: AbortSignal) => Promise<T>) => {
+function useResource<T>(loader: (signal: AbortSignal) => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -25,5 +25,5 @@ const useResource = <T>(loader: (signal: AbortSignal) => Promise<T>) => {
   }, [loader, version]);
   const refresh = useCallback(() => setVersion((v) => v + 1), []);
   return { data, setData, loading, error, refresh };
-};
+}
 export default useResource;

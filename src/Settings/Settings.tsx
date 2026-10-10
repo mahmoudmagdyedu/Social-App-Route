@@ -1,13 +1,13 @@
+import { changePassword, uploadProfilePhoto } from "../API/API";
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { authService } from "../services/social";
-import { errorMessage, validateImage } from "../services/api";
+import { errorMessage, validateImage } from "../API/API";
 import { passwordSchema } from "../services/validation";
 import Avatar from "../components/Avatar";
 import Icon from "../components/Icon";
-const Settings = () => {
+function Settings() {
   const { user, refreshUser, setSession, logout } = useAuth();
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -20,7 +20,7 @@ const Settings = () => {
     try {
       validateImage(file);
       setUploading(true);
-      await authService.uploadPhoto(file);
+      await uploadProfilePhoto(file);
       await refreshUser();
       toast.success("صورتك اتحدثت");
     } catch (e) {
@@ -29,7 +29,7 @@ const Settings = () => {
       setUploading(false);
     }
   };
-  const changePassword = async (e: FormEvent) => {
+  const handlePasswordChange = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
     const validation = passwordSchema.safeParse(newPassword);
@@ -51,7 +51,7 @@ const Settings = () => {
     }
     setSaving(true);
     try {
-      const result = await authService.changePassword(password, newPassword);
+      const result = await changePassword(password, newPassword);
       setSession({ token: result.data.token, user: result.data.user || user! });
       setPassword("");
       setNewPassword("");
@@ -131,7 +131,7 @@ const Settings = () => {
         <p className="text-xs text-slate-500 mb-6">
           اختار كلمة سر قوية ومختلفة، عشان حسابك يفضل آمن.
         </p>
-        <form onSubmit={changePassword} className="space-y-4">
+        <form onSubmit={handlePasswordChange} className="space-y-4">
           {error && (
             <p className="alert-error" role="alert">
               {error}
@@ -181,5 +181,5 @@ const Settings = () => {
       </button>
     </>
   );
-};
+}
 export default Settings;

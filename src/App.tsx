@@ -4,21 +4,21 @@ import {
   Outlet,
   RouterProvider,
   useLocation,
-} from "react-router";
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "./context/AuthProvider";
 import { useAuth } from "./context/AuthContext";
 import Layout from "./Layout/Layout";
-import Auth from "./pages/Auth";
-import Feed from "./pages/Feed";
-import Profile from "./pages/Profile";
-import PostDetails from "./pages/PostDetails";
-import Discover from "./pages/Discover";
-import Notifications from "./pages/Notifications";
-import Settings from "./pages/Settings";
-import NotFound from "./pages/NotFound";
+import Auth from "./Auth/Auth";
+import Home from "./Home/Home";
+import Profile from "./Profile/Profile";
+import PostDetails from "./PostDetails/PostDetails";
+import Discover from "./Discover/Discover";
+import Notifications from "./Notifications/Notifications";
+import Settings from "./Settings/Settings";
+import NotFound from "./NotFound/NotFound";
 import { ErrorState, Skeleton } from "./components/Status";
-const ProtectedRoute = () => {
+function ProtectedRoute() {
   const { user, loading, error } = useAuth();
   const location = useLocation();
   if (loading)
@@ -45,7 +45,7 @@ const ProtectedRoute = () => {
       state={{ from: location.pathname + location.search }}
     />
   );
-};
+}
 const router = createBrowserRouter([
   { path: "/login", element: <Auth /> },
   { path: "/signup", element: <Auth signup /> },
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
       {
         element: <Layout />,
         children: [
-          { path: "/", element: <Feed key="feed" /> },
-          { path: "/bookmarks", element: <Feed key="bookmarks" bookmarks /> },
+          { path: "/", element: <Home key="feed" /> },
+          { path: "/bookmarks", element: <Home key="bookmarks" bookmarks /> },
           { path: "/profile", element: <Profile /> },
           { path: "/users/:userId", element: <Profile /> },
           { path: "/posts/:postId", element: <PostDetails /> },
@@ -69,7 +69,8 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-const App = () => (
+function App() {
+  return (
   <AuthProvider>
     <RouterProvider router={router} />
     <Toaster
@@ -85,4 +86,5 @@ const App = () => (
     />
   </AuthProvider>
 );
+}
 export default App;

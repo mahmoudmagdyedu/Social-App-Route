@@ -1,6 +1,7 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { EmptyState } from "../components/Status";
-const NotFound = () => (
+function NotFound() {
+  return (
   <>
     <EmptyState
       title="الصفحة دي مش موجودة"
@@ -11,4 +12,5 @@ const NotFound = () => (
     </Link>
   </>
 );
+}
 export default NotFound;

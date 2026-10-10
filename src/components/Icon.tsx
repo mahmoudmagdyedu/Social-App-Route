@@ -32,7 +32,7 @@ const paths = {
     "m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5ZM21 2v4m-2-2h4",
 };
 export type IconName = keyof typeof paths;
-const Icon = ({
+function Icon({
   name,
   className = "",
   filled = false,
@@ -40,7 +40,8 @@ const Icon = ({
   name: IconName;
   className?: string;
   filled?: boolean;
-}) => (
+}) {
+  return (
   <svg
     className={`size-5 shrink-0 ${className}`}
     viewBox="0 0 24 24"
@@ -54,4 +55,5 @@ const Icon = ({
     <path d={paths[name]} />
   </svg>
 );
+}
 export default Icon;

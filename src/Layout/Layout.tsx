@@ -1,7 +1,7 @@
+import { getSuggestedUsers, getUnreadCount } from "../API/API";
 import { useCallback, useEffect, useState } from "react";
-import { Link, NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { notificationService, userService } from "../services/social";
 import useCollection from "../hooks/useCollection";
 import Nav from "../Nav/Nav";
 import Avatar from "../components/Avatar";
@@ -16,20 +16,19 @@ const links: { path: string; label: string; icon: IconName }[] = [
   { path: "/profile", label: "الملف الشخصي", icon: "users" },
   { path: "/settings", label: "الإعدادات", icon: "settings" },
 ];
-const Layout = () => {
+function Layout() {
   const { user, logout } = useAuth();
   const [unread, setUnread] = useState(0);
   const loader = useCallback(
     (page: number, signal: AbortSignal) =>
-      userService.suggestions(page, signal),
+      getSuggestedUsers(page, signal),
     []
   );
   const suggestions = useCollection(loader);
   useEffect(() => {
     const controller = new AbortController();
     const updateCount = () =>
-      notificationService
-        .count(controller.signal)
+      getUnreadCount(controller.signal)
         .then((result) => setUnread(result.data.unreadCount))
         .catch(() => {});
     updateCount();
@@ -160,5 +159,5 @@ const Layout = () => {
       </nav>
     </>
   );
-};
+}
 export default Layout;

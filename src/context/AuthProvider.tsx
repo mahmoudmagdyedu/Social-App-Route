@@ -1,12 +1,12 @@
+import { getLoggedUser } from "../API/API";
 import { useCallback, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "./AuthContext";
-import { authService } from "../services/social";
-import { ApiError, errorMessage, TOKEN_KEY } from "../services/api";
+import { ApiError, errorMessage, TOKEN_KEY } from "../API/API";
 import type { AuthData, User } from "../types";
 
-const AuthProvider = ({ children }: { children: ReactNode }) => {
+function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(() =>
     Boolean(localStorage.getItem(TOKEN_KEY))
@@ -23,9 +23,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(data.user);
     setLoading(false);
     setError("");
-    // الدخول يرجع مستخدم مختصر؛ نجلب بياناته الكاملة والعدادات في الخلفية.
-    authService
-      .me()
+    getLoggedUser()
       .then((result) => {
         if (localStorage.getItem(TOKEN_KEY) === data.token)
           setUser(result.data.user);
@@ -34,7 +32,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
   const refreshUser = useCallback(async () => {
     const token = localStorage.getItem(TOKEN_KEY);
-    const result = await authService.me();
+    const result = await getLoggedUser();
     if (token && localStorage.getItem(TOKEN_KEY) === token)
       setUser(result.data.user);
   }, []);
@@ -42,8 +40,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const controller = new AbortController();
     if (localStorage.getItem(TOKEN_KEY)) {
-      authService
-        .me(controller.signal)
+      getLoggedUser(controller.signal)
         .then((result) => setUser(result.data.user))
         .catch((e) => {
           if (
@@ -79,5 +76,5 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 export default AuthProvider;

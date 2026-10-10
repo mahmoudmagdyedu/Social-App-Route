@@ -1,8 +1,8 @@
+import { getNotifications, readNotification, readAllNotifications } from "../API/API";
 import { useCallback, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { notificationService } from "../services/social";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import { formatTime } from "../services/format";
 import useCollection from "../hooks/useCollection";
 import Avatar from "../components/Avatar";
@@ -32,7 +32,7 @@ const labels: Record<string, string> = {
   like_comment: "عجبه تعليقك",
   comment_like: "عجبه تعليقك",
 };
-const notificationLink = (item: Notification) => {
+function notificationLink(item: Notification) {
   if (item.type === "follow" || item.entityType === "user")
     return `/users/${item.actor?._id}`;
   const post = item.post || item.entity?.post;
@@ -42,21 +42,21 @@ const notificationLink = (item: Notification) => {
     : item.entityType === "post" && (item.entity?._id || item.entityId)
       ? `/posts/${item.entity?._id || item.entityId}`
       : null;
-};
-const Notifications = () => {
+}
+function Notifications() {
   const [unread, setUnread] = useState(false);
   const [busy, setBusy] = useState(false);
   const loader = useCallback(
     (page: number, signal: AbortSignal) =>
-      notificationService.list(page, signal, unread),
+      getNotifications(page, signal, unread),
     [unread]
   );
   const list = useCollection(loader);
   const read = async (id?: string) => {
     setBusy(true);
     try {
-      if (id) await notificationService.read(id);
-      else await notificationService.readAll();
+      if (id) await readNotification(id);
+      else await readAllNotifications();
       list.refresh();
       window.dispatchEvent(new Event("notifications-changed"));
     } catch (e) {
@@ -171,5 +171,5 @@ const Notifications = () => {
       )}
     </>
   );
-};
+}
 export default Notifications;

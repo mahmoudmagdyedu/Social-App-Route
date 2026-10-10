@@ -1,6 +1,7 @@
 import Icon from "./Icon";
 import type { Pagination } from "../types";
-export const Skeleton = () => (
+export function Skeleton() {
+  return (
   <div className="space-y-4" role="status" aria-label="جاري التحميل">
     {[1, 2, 3].map((n) => (
       <div className="card p-6 animate-pulse" key={n}>
@@ -18,13 +19,15 @@ export const Skeleton = () => (
     ))}
   </div>
 );
-export const ErrorState = ({
+}
+export function ErrorState({
   message,
   retry,
 }: {
   message: string;
   retry?: () => void;
-}) => (
+}) {
+  return (
   <div className="card empty-state" role="alert">
     <span className="empty-icon">
       <Icon name="globe" />
@@ -38,13 +41,15 @@ export const ErrorState = ({
     )}
   </div>
 );
-export const EmptyState = ({
+}
+export function EmptyState({
   title,
   text,
 }: {
   title: string;
   text: string;
-}) => (
+}) {
+  return (
   <div className="card empty-state">
     <span className="empty-icon">
       <Icon name="spark" />
@@ -53,7 +58,8 @@ export const EmptyState = ({
     <p>{text}</p>
   </div>
 );
-export const PaginationControls = ({
+}
+export function PaginationControls({
   pagination,
   page,
   setPage,
@@ -61,8 +67,8 @@ export const PaginationControls = ({
   pagination?: Pagination;
   page: number;
   setPage: (page: number) => void;
-}) =>
-  pagination && pagination.numberOfPages > 1 ? (
+}) {
+  return pagination && pagination.numberOfPages > 1 ? (
     <nav className="pagination" aria-label="صفحات النتائج">
       <button
         className="btn-secondary"
@@ -83,3 +89,4 @@ export const PaginationControls = ({
       </button>
     </nav>
   ) : null;
+}

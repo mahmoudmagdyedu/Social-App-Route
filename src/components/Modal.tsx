@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import Icon from "./Icon";
-const Modal = ({
+function Modal({
   title,
   children,
   onClose,
@@ -9,7 +9,7 @@ const Modal = ({
   title: string;
   children: ReactNode;
   onClose: () => void;
-}) => {
+}) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = ref.current;
@@ -44,5 +44,5 @@ const Modal = ({
       <div className="p-6">{children}</div>
     </dialog>
   );
-};
+}
 export default Modal;

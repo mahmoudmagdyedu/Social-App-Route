@@ -1,15 +1,15 @@
+import { getPost } from "../API/API";
 import { useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router";
-import { postService } from "../services/social";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useResource from "../hooks/useResource";
 import PostCard from "../components/PostCard";
 import Icon from "../components/Icon";
 import { ErrorState, Skeleton } from "../components/Status";
-const PostDetails = () => {
+function PostDetails() {
   const { postId } = useParams();
   const navigate = useNavigate();
   const loader = useCallback(
-    (signal: AbortSignal) => postService.one(postId!, signal),
+    (signal: AbortSignal) => getPost(postId!, signal),
     [postId]
   );
   const post = useResource(loader);
@@ -37,5 +37,5 @@ const PostDetails = () => {
       )}
     </>
   );
-};
+}
 export default PostDetails;

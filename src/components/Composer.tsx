@@ -1,12 +1,12 @@
+import { createPost } from "../API/API";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { postService } from "../services/social";
 import Avatar from "./Avatar";
 import MediaForm from "./MediaForm";
-const Composer = ({ onCreated }: { onCreated: () => void }) => {
+function Composer({ onCreated }: { onCreated: () => void }) {
   const { user } = useAuth();
   const create = async (text: string, image?: File) => {
-    await postService.create(text, image);
+    await createPost(text, image);
     toast.success("حكايتك اتنشرت ✨");
     onCreated();
   };
@@ -24,5 +24,5 @@ const Composer = ({ onCreated }: { onCreated: () => void }) => {
       <MediaForm onSubmit={create} />
     </section>
   );
-};
+}
 export default Composer;

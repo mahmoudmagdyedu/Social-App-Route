@@ -1,5 +1,5 @@
+import { getSuggestedUsers } from "../API/API";
 import { useCallback, useState } from "react";
-import { userService } from "../services/social";
 import useCollection from "../hooks/useCollection";
 import UserCard from "../components/UserCard";
 import Icon from "../components/Icon";
@@ -9,11 +9,11 @@ import {
   PaginationControls,
   Skeleton,
 } from "../components/Status";
-const Discover = () => {
+function Discover() {
   const [query, setQuery] = useState("");
   const loader = useCallback(
     (page: number, signal: AbortSignal) =>
-      userService.suggestions(page, signal),
+      getSuggestedUsers(page, signal),
     []
   );
   const list = useCollection(loader);
@@ -77,5 +77,5 @@ const Discover = () => {
       )}
     </>
   );
-};
+}
 export default Discover;

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import type { User } from "../types";
-const Avatar = ({
+function Avatar({
   user,
   size = "md",
 }: {
   user?: User | null;
   size?: "sm" | "md" | "lg";
-}) => {
+}) {
   const [failedPhoto, setFailedPhoto] = useState<string>();
   return (
     <span
@@ -25,5 +25,5 @@ const Avatar = ({
       )}
     </span>
   );
-};
+}
 export default Avatar;

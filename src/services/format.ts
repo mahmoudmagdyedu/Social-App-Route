@@ -1,15 +1,13 @@
 import type { User } from "../types";
-export const hasLiked = (
-  likes: (string | User)[] | undefined,
-  userId: string | undefined
-) =>
-  Boolean(
+export function hasLiked(likes: (string | User)[] | undefined, userId: string | undefined) {
+  return Boolean(
     userId &&
     likes?.some(
       (like) => (typeof like === "string" ? like : like._id) === userId
     )
   );
-export const formatTime = (value: string) => {
+}
+export function formatTime(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
   const diff = Math.max(0, Date.now() - date.getTime());
@@ -21,4 +19,4 @@ export const formatTime = (value: string) => {
     month: "long",
     year: "numeric",
   });
-};
+}

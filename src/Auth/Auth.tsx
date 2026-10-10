@@ -1,16 +1,16 @@
+import { signUp, signIn } from "../API/API";
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { authService } from "../services/social";
-import { errorMessage } from "../services/api";
+import { errorMessage } from "../API/API";
 import { signinSchema, signupSchema } from "../services/validation";
 import type { SignupValues } from "../types";
 import Brand from "../components/Brand";
 import Icon from "../components/Icon";
 
-const Auth = ({ signup = false }: { signup?: boolean }) => {
+function Auth({ signup = false }: { signup?: boolean }) {
   const { user, setSession, error: sessionError } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,8 +45,8 @@ const Auth = ({ signup = false }: { signup?: boolean }) => {
     setLoading(true);
     try {
       const response = signup
-        ? await authService.signup(values)
-        : await authService.signin(values.login.trim(), values.password);
+        ? await signUp(values)
+        : await signIn(values.login.trim(), values.password);
       setSession(response.data);
       toast.success(
         signup ? "حسابك جاهز. أهلاً بيك!" : "حمد الله على السلامة! 👋"
@@ -310,5 +310,5 @@ const Auth = ({ signup = false }: { signup?: boolean }) => {
       </footer>
     </div>
   );
-};
+}
 export default Auth;
