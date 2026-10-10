@@ -27,7 +27,6 @@ function Auth({ signup = false }: { signup?: boolean }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [apiError, setApiError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   if (user) return <Navigate to="/" replace />;
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -79,30 +78,20 @@ function Auth({ signup = false }: { signup?: boolean }) {
         <input
           id={name}
           name={name}
-          type={type === "password" && showPassword ? "text" : type}
+          type={type}
           value={values[name]}
           autoComplete={autoComplete}
           placeholder={placeholder}
           max={
             type === "date" ? new Date().toISOString().slice(0, 10) : undefined
           }
-          dir={name === "name" ? "auto" : "ltr"}
+          dir="ltr"
           aria-invalid={Boolean(errors[name])}
           aria-describedby={errors[name] ? `${name}-error` : undefined}
           onChange={(e) =>
             setValues((prev) => ({ ...prev, [name]: e.target.value }))
           }
         />
-        {type === "password" && (
-          <button
-            type="button"
-            className="password-toggle"
-            aria-label={showPassword ? "إخفاء كلمة السر" : "إظهار كلمة السر"}
-            onClick={() => setShowPassword((v) => !v)}
-          >
-            <Icon name="eye" />
-          </button>
-        )}
       </div>
       {errors[name] && (
         <p className="field-error" id={`${name}-error`}>
@@ -206,7 +195,7 @@ function Auth({ signup = false }: { signup?: boolean }) {
               {apiError || sessionError}
             </p>
           )}
-          <form onSubmit={handleSubmit} noValidate className="space-y-4">
+          <form dir="ltr" onSubmit={handleSubmit} noValidate className="space-y-4 text-left">
             {signup ? (
               <>
                 <div className="grid sm:grid-cols-2 gap-4">

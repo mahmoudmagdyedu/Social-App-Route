@@ -167,9 +167,6 @@ select:focus {
 .input::placeholder {
   color: #a4afbf;
 }
-.field input[type="password"] {
-  padding-inline-start: 44px;
-}
 .field-error {
   color: #d03345;
   font-size: 12px;
@@ -185,14 +182,6 @@ select:focus {
   border-radius: 10px;
   color: #af2836;
   font-size: 13px;
-}
-.password-toggle {
-  position: absolute;
-  inset-inline-end: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #929eb1;
-  padding: 3px;
 }
 .brand {
   display: inline-flex;
