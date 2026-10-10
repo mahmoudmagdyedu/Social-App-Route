@@ -1,0 +1,1444 @@
+{
+  "info": {
+    "_postman_id": "a36610f8-22fb-4d75-882d-7a990f2e2046",
+    "name": "Route Academy - Route Posts API",
+    "description": "<html><head></head><body><img src=\"https://content.pstmn.io/6eea5c8b-f51d-4b1c-8acd-b8799d80944e/cm91dGUucG5n\" alt=\"Route%20Academy%20Logo\" height=\"284\" width=\"270\">\n\n<h2 id=\"about-route-academy\">About Route Academy</h2>\n<p>Route Academy is Egypt's leading Information Technology training center, established in 2012. We specialize in delivering high-quality training in programming, web development, and app development.</p>\n<p>This collection includes all API endpoints for Route Posts with ready-to-run examples.</p>\n<h2 id=\"standard-response-shape\">Standard Response Shape</h2>\n<p>All endpoints return a unified format:</p>\n<pre class=\"click-to-expand-wrapper is-snippet-wrapper\"><code class=\"language-json\">{\n  \"success\": true,\n  \"message\": \"...\",\n  \"data\": {},\n  \"meta\": {}\n}\n\n</code></pre>\n<p>Error format:</p>\n<pre class=\"click-to-expand-wrapper is-snippet-wrapper\"><code class=\"language-json\">{\n  \"success\": false,\n  \"message\": \"...\",\n  \"errors\": \"...\"\n}\n\n</code></pre>\n</body></html>",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "toc": [],
+    "owner": "5709532",
+    "collectionId": "a36610f8-22fb-4d75-882d-7a990f2e2046",
+    "publishedId": "2sBXcBnNAq",
+    "public": true,
+    "customColor": {
+      "top-bar": "FFFFFF",
+      "right-sidebar": "00298d",
+      "highlight": "00298d"
+    },
+    "publishDate": "2026-02-13T12:52:13Z"
+  },
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "id": "6421510f-bf83-458c-ab12-f44c8b082440",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/",
+            "description": "<p>Simple endpoint to verify server is running.</p>\n",
+            "urlObject": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "6421510f-bf83-458c-ab12-f44c8b082440"
+        }
+      ],
+      "id": "b1ab967b-3ea3-44ea-b867-62264ba82ceb",
+      "_postman_id": "b1ab967b-3ea3-44ea-b867-62264ba82ceb",
+      "description": ""
+    },
+    {
+      "name": "Users & Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "id": "9f80fbcc-83ab-4223-84e1-f463248f0e8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmed Bahnasy\",\n  \"username\": \"Bahnasy202222\",\n  \"email\": \"bahnasyd20222@gmail.com\",\n  \"dateOfBirth\": \"2000-01-01\",\n  \"gender\": \"male\",\n  \"password\": \"Aa@123456\",\n  \"rePassword\": \"Aa@123456\"\n}"
+            },
+            "url": "https://route-posts.routemisr.com/users/signup",
+            "description": "<p>Create new account and return auth token + basic user data.</p>\n",
+            "urlObject": {
+              "path": [
+                "users",
+                "signup"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "9f80fbcc-83ab-4223-84e1-f463248f0e8d"
+        },
+        {
+          "name": "Signin",
+          "id": "4c10d7c3-52b0-4526-ab27-8198eee87557",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmedbahnasy@gmail.com\",\n  \"password\": \"Bahnasy@123\"\n}"
+            },
+            "url": "https://route-posts.routemisr.com/users/signin",
+            "description": "<p>Login with <code>email</code>, <code>username</code>, or <code>login</code> plus password. Returns auth token + user data.</p>\n",
+            "urlObject": {
+              "path": [
+                "users",
+                "signin"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "4c10d7c3-52b0-4526-ab27-8198eee87557"
+        },
+        {
+          "name": "Change Password",
+          "id": "ac322103-0135-45b5-a403-7a01f09ac316",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"Aa@123456\",\n  \"newPassword\": \"Bb@123456\"\n}"
+            },
+            "url": "https://route-posts.routemisr.com/users/change-password",
+            "description": "<p>Change password and return refreshed auth token.</p>\n",
+            "urlObject": {
+              "path": [
+                "users",
+                "change-password"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ac322103-0135-45b5-a403-7a01f09ac316"
+        },
+        {
+          "name": "Upload Profile Photo",
+          "id": "b3f40943-39d3-405c-9eec-023a6af2bd04",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "value": null
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/users/upload-photo",
+            "urlObject": {
+              "path": [
+                "users",
+                "upload-photo"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "b3f40943-39d3-405c-9eec-023a6af2bd04"
+        },
+        {
+          "name": "Get My Profile",
+          "id": "d1d65999-db96-4631-8109-a779575fc53b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users/profile-data",
+            "urlObject": {
+              "path": [
+                "users",
+                "profile-data"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "d1d65999-db96-4631-8109-a779575fc53b"
+        },
+        {
+          "name": "Get Bookmarks",
+          "id": "43ea694c-c593-4236-bcf2-e6820e2a2267",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users/bookmarks",
+            "urlObject": {
+              "path": [
+                "users",
+                "bookmarks"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "43ea694c-c593-4236-bcf2-e6820e2a2267"
+        },
+        {
+          "name": "Get Follow Suggestions",
+          "id": "f641df52-14b5-477f-ab71-16ad1fa7eae2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users/suggestions?limit=10",
+            "urlObject": {
+              "path": [
+                "users",
+                "suggestions"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "f641df52-14b5-477f-ab71-16ad1fa7eae2"
+        },
+        {
+          "name": "Get User Profile",
+          "id": "ed86bd63-4a6d-4cf1-86cd-15bbc6701438",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users//profile",
+            "urlObject": {
+              "path": [
+                "users",
+                "",
+                "profile"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ed86bd63-4a6d-4cf1-86cd-15bbc6701438"
+        },
+        {
+          "name": "Follow/Unfollow User",
+          "id": "207d3dcb-aa7e-47d5-bcce-fa633593b161",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users//follow",
+            "urlObject": {
+              "path": [
+                "users",
+                "",
+                "follow"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "207d3dcb-aa7e-47d5-bcce-fa633593b161"
+        },
+        {
+          "name": "Get User Posts (Nested)",
+          "id": "2aeef45a-6bd3-4522-98e2-52f8755576e8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/users//posts",
+            "urlObject": {
+              "path": [
+                "users",
+                "",
+                "posts"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "2aeef45a-6bd3-4522-98e2-52f8755576e8"
+        }
+      ],
+      "id": "e9e6d6ea-45e3-44b7-ad7a-c5056db7265e",
+      "_postman_id": "e9e6d6ea-45e3-44b7-ad7a-c5056db7265e",
+      "description": ""
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "id": "02a845fe-c3f1-4f44-ab16-6dc7e016716c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts",
+            "urlObject": {
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "02a845fe-c3f1-4f44-ab16-6dc7e016716c"
+        },
+        {
+          "name": "Get Home Feed",
+          "id": "7ac1d73a-4ccc-463e-aa61-3cf53e8552f3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts/feed?only=following&limit=10",
+            "description": "<p>Supports: only, hasImage, page/limit, cursor/limit</p>\n",
+            "urlObject": {
+              "path": [
+                "posts",
+                "feed"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "only",
+                  "value": "following"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "7ac1d73a-4ccc-463e-aa61-3cf53e8552f3"
+        },
+        {
+          "name": "Create Post",
+          "id": "a79b249d-6817-41c8-bc64-7e1fd861f650",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "body",
+                  "value": "Hello Route Academy! @ahmed_ali",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/Users/ahmedabdal-muti/Desktop/Screenshot 2026-01-21 at 6.34.47 AM.png"
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/posts",
+            "urlObject": {
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "a79b249d-6817-41c8-bc64-7e1fd861f650"
+        },
+        {
+          "name": "Get Single Post",
+          "id": "ad48de1d-ade8-4fe6-a263-9ef7b0096e62",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts/",
+            "urlObject": {
+              "path": [
+                "posts",
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ad48de1d-ade8-4fe6-a263-9ef7b0096e62"
+        },
+        {
+          "name": "Get Post likes",
+          "id": "d3d84665-3db4-4596-82e6-8da8536b0aaa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts/:postId/likes?page=1&limit=20",
+            "urlObject": {
+              "path": [
+                "posts",
+                ":postId",
+                "likes"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "698f2c2ac2767af7f1aff4f6",
+                  "key": "postId"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "d3d84665-3db4-4596-82e6-8da8536b0aaa"
+        },
+        {
+          "name": "Update Post",
+          "id": "276ab18e-03e7-4287-a85e-d9d9a67f64a1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "body",
+                  "value": "Updated text with mention @route_user",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "value": ""
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/posts/",
+            "urlObject": {
+              "path": [
+                "posts",
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "276ab18e-03e7-4287-a85e-d9d9a67f64a1"
+        },
+        {
+          "name": "Delete Post",
+          "id": "70b42ec2-325f-4f95-9df5-757997c8a508",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts/",
+            "urlObject": {
+              "path": [
+                "posts",
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "70b42ec2-325f-4f95-9df5-757997c8a508"
+        },
+        {
+          "name": "Like/Unlike Post",
+          "id": "1c7c1ec5-1537-446d-aca1-0df4c1710b88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//like",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "like"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "1c7c1ec5-1537-446d-aca1-0df4c1710b88"
+        },
+        {
+          "name": "Bookmark/Unbookmark Post",
+          "id": "77c8b6f7-da4b-4cae-bf62-d404f16a30c0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//bookmark",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "bookmark"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "77c8b6f7-da4b-4cae-bf62-d404f16a30c0"
+        },
+        {
+          "name": "Share Post",
+          "id": "f9db70d7-4670-4162-b7e2-b32ab625a2ec",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"Sharing this great post @mentor_user\"\n}"
+            },
+            "url": "https://route-posts.routemisr.com/posts//share",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "share"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "f9db70d7-4670-4162-b7e2-b32ab625a2ec"
+        }
+      ],
+      "id": "98ba2093-53b7-4f39-a60e-c9322180db6d",
+      "_postman_id": "98ba2093-53b7-4f39-a60e-c9322180db6d",
+      "description": ""
+    },
+    {
+      "name": "Comments & Replies",
+      "item": [
+        {
+          "name": "Get Post Comments",
+          "id": "9745af23-a6b1-412d-8489-2ae3276f0d2a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//comments?page=1&limit=10",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "9745af23-a6b1-412d-8489-2ae3276f0d2a"
+        },
+        {
+          "name": "Create Comment",
+          "id": "ef447f68-09de-450a-9c69-648a3ae2f82c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "Nice post @ahmed_ali",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "value": null
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/posts//comments",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ef447f68-09de-450a-9c69-648a3ae2f82c"
+        },
+        {
+          "name": "Get Comment Replies",
+          "id": "b74dfbaf-c814-4bfc-9c6c-785cc46e3952",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//comments//replies?page=1&limit=10",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments",
+                "",
+                "replies"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "b74dfbaf-c814-4bfc-9c6c-785cc46e3952"
+        },
+        {
+          "name": "Create Reply",
+          "id": "574711e8-4d50-4cba-97a2-88be02cb7d19",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "Reply with mention @mentor_user",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "value": ""
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/posts//comments//replies",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments",
+                "",
+                "replies"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "574711e8-4d50-4cba-97a2-88be02cb7d19"
+        },
+        {
+          "name": "Update Comment",
+          "id": "040e5e34-a82c-4684-a589-2e87b02dbe97",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "Updated comment text",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "value": ""
+                }
+              ]
+            },
+            "url": "https://route-posts.routemisr.com/posts//comments/",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments",
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "040e5e34-a82c-4684-a589-2e87b02dbe97"
+        },
+        {
+          "name": "Delete Comment",
+          "id": "6d57797d-80a9-45c9-88ee-be5ca1e02d1d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//comments/",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments",
+                ""
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "6d57797d-80a9-45c9-88ee-be5ca1e02d1d"
+        },
+        {
+          "name": "Like/Unlike Comment",
+          "id": "b62e5f7a-f17d-414e-a897-ed25820a6f0c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PUT",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/posts//comments//like",
+            "urlObject": {
+              "path": [
+                "posts",
+                "",
+                "comments",
+                "",
+                "like"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "b62e5f7a-f17d-414e-a897-ed25820a6f0c"
+        }
+      ],
+      "id": "8f871e46-abde-469a-b83e-f8da877e7d11",
+      "_postman_id": "8f871e46-abde-469a-b83e-f8da877e7d11",
+      "description": ""
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "id": "e3938e5e-ab1c-4ce1-98b3-780b97cf1e6a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/notifications?unread=false&page=1&limit=10",
+            "urlObject": {
+              "path": [
+                "notifications"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [
+                {
+                  "key": "unread",
+                  "value": "false"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "e3938e5e-ab1c-4ce1-98b3-780b97cf1e6a"
+        },
+        {
+          "name": "Get Unread Count",
+          "id": "46b49940-ace8-4b87-8326-08cf07ad5641",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "GET",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/notifications/unread-count",
+            "urlObject": {
+              "path": [
+                "notifications",
+                "unread-count"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "46b49940-ace8-4b87-8326-08cf07ad5641"
+        },
+        {
+          "name": "Mark Notification As Read",
+          "id": "14748433-b1a0-4778-9c13-d3addd23eb4a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/notifications//read",
+            "urlObject": {
+              "path": [
+                "notifications",
+                "",
+                "read"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "14748433-b1a0-4778-9c13-d3addd23eb4a"
+        },
+        {
+          "name": "Mark All As Read",
+          "id": "ed2a0eb0-2ad4-4ece-8b45-bcb298fecc81",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "basicConfig": [
+                  {
+                    "key": "token",
+                    "value": "•••••••"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": "https://route-posts.routemisr.com/notifications/read-all",
+            "urlObject": {
+              "path": [
+                "notifications",
+                "read-all"
+              ],
+              "host": [
+                "https://route-posts.routemisr.com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ed2a0eb0-2ad4-4ece-8b45-bcb298fecc81"
+        }
+      ],
+      "id": "a73a84eb-4eea-4258-bba7-351c5f68897d",
+      "_postman_id": "a73a84eb-4eea-4258-bba7-351c5f68897d",
+      "description": ""
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://route-posts.routemisr.com"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "postId",
+      "value": ""
+    },
+    {
+      "key": "commentId",
+      "value": ""
+    },
+    {
+      "key": "notificationId",
+      "value": ""
+    },
+    {
+      "key": "cursor",
+      "value": ""
+    }
+  ]
+}

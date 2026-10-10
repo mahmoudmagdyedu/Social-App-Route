@@ -1,0 +1,24 @@
+{
+  "cleanedAt": "2026-10-05T18:41:27.319Z",
+  "deletedPosts": [
+    {
+      "postId": "6ac3ed7b8ebe92c2c0f01a28",
+      "deleted": true
+    },
+    {
+      "postId": "6ac3ec0f8ebe92c2c0f009cd",
+      "deleted": true
+    },
+    {
+      "postId": "6ac3eab08ebe92c2c0eff56a",
+      "deleted": true
+    },
+    {
+      "postId": "6ac3e6b28ebe92c2c0efd78f",
+      "deleted": true
+    }
+  ],
+  "remainingPosts": 0,
+  "qaFollowRelationshipsRemoved": true,
+  "accountsRemain": true
+}
